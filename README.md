@@ -1,4 +1,4 @@
-# Avances_reporte_ISCB
+# Avances con el reporte ISCB
 Avances y muestra de lo que se lleva al momento
 
 ## Diversidad de becas
