@@ -1,0 +1,183 @@
+---
+title: "ISCB Gender Report"
+author: "Ma. Eugenia Alejandra Medina Rivera"
+format: html
+editor: visual
+---
+
+![](logo.png){fig-align="center"}
+
+# Gender report of ISCB Fellows awarded during 2016-2023
+
+```{r, echo=FALSE, message=FALSE}
+load("data/archivos_limpios_fellow_and_adwards.rda")
+library(ggplot2)
+library(reshape2)
+
+
+# Crear el mapa de calor
+ggplot(melt(df_f_g), aes(x = Submitter, y = Nominee, fill = value)) +
+  geom_tile(color = "black") +
+  labs(
+    x = "Submitter Gender",
+       y = "Nominee Gender",
+       fill = "Counts") +
+  scale_fill_gradient(low = "white", high = "red") +
+  theme_minimal() +
+  theme(text = element_text(size = 20),
+        axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
+        title = element_text(vjust = 0.5, face = "bold"))
+```
+
+------------------------------------------------------------------------
+
+```{r, echo=FALSE, message=FALSE}
+load("data/Fellows_Gender.rda")
+
+ggplot(fellows_gender, aes(x = `Submitter Gender`, fill = `Nominee Gender`)) +
+  geom_bar(position = "fill", color = "black") +
+  theme_minimal() +
+  labs(x = "Submitter Gender", y = "Proportion", fill = "Nominee Gender") +
+  scale_fill_manual(values = c("Female" = "pink", "Male" = "#337dff", "Not Provided" = "grey", "Prefer not to declare" = "white")) +
+  theme(text = element_text(size = 20),
+        axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
+        title = element_text(vjust = 0.5, face = "bold"))
+```
+
+------------------------------------------------------------------------
+
+```{r, echo=FALSE, message=FALSE}
+load("data/Fellows_Gender.rda")
+library(kableExtra)
+library(dplyr)
+a <- table(fellows_gender$`Submitter Gender`, fellows_gender$`Nominee Gender`)
+
+# Create the kable table
+kable(a, format = "html", caption = "Nominees Genders by Submitter Genders", align = "cccc") %>%
+  kable_styling(full_width = F, position = "center") %>%
+  add_footnote("ISCB 2016-2023") 
+
+```
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+# Gender Awards ISCB from 2016 to 2023
+
+## Outstanding Contributions to ISCB
+
+```{r, echo=FALSE, message=FALSE}
+ggplot(melt(df_o), aes(x = Submitter, y = Nominee, fill = value)) +
+  geom_tile(color = "black") +
+  labs(
+       x = "Submitter Gender",
+       y = "Nominee Gender",
+       fill = "Counts") +
+  scale_fill_gradient(low = "white", high = "red") +
+  theme_minimal() +
+  theme(text = element_text(size = 20),
+        axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
+        title = element_text(vjust = 0.5, face = "bold"))
+```
+
+------------------------------------------------------------------------
+
+## Senior Scientist ISCB
+
+```{r, echo=FALSE, message=FALSE}
+
+
+ggplot(melt(df_senior), aes(x = Submitter, y = Nominee, fill = value)) +
+  geom_tile(color = "black") +
+  labs(
+       x = "Submitter Gender",
+       y = "Nominee Gender",
+       fill = "Counts") +
+  scale_fill_gradient(low = "white", high = "red") +
+  theme_minimal() +
+  theme(text = element_text(size = 20),
+        axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
+        title = element_text(vjust = 0.5, face = "bold"))
+```
+
+------------------------------------------------------------------------
+
+## ISCB Innovator
+
+```{r, echo=FALSE, message=FALSE}
+ggplot(melt(df_senior), aes(x = Submitter, y = Nominee, fill = value)) +
+  geom_tile(color = "black") +
+  labs(
+       x = "Submitter Gender",
+       y = "Nominee Gender",
+       fill = "Counts") +
+  scale_fill_gradient(low = "white", high = "red") +
+  theme_minimal() +
+  theme(text = element_text(size = 20),
+        axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
+        title = element_text(vjust = 0.5, face = "bold"))
+
+```
+
+------------------------------------------------------------------------
+
+## Overton Prize ISCB
+
+```{r, echo=FALSE, message=FALSE}
+
+ggplot(melt(df_overton), aes(x = Submitter, y = Nominee, fill = value)) +
+  geom_tile(color = "black") +
+  labs(
+       x = "Submitter Gender",
+       y = "Nominee Gender",
+       fill = "Counts") +
+  scale_fill_gradient(low = "white", high = "red") +
+  theme_minimal() +
+  theme(text = element_text(size = 20),
+        axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
+        title = element_text(vjust = 0.5, face = "bold"))
+
+```
+
+### References Tables
+
+```{r, echo=FALSE, message=FALSE}
+load("data/crude_tables_awards.rda")
+a <- table(df_outstanding$Sumitter, df_outstanding$Nominee)
+
+# Create the kable table
+kable(a, format = "html", caption = "Nominees Genders by Submitter Genders. Outstanding Contributions Award", align = "cccc") %>%
+  kable_styling(full_width = F, position = "center") %>%
+  add_footnote("ISCB 2016-2023") 
+```
+
+```{r echo=FALSE, message=FALSE}
+a <- table(senior_df$Sumitter, senior_df$Nominee)
+
+# Create the kable table
+kable(a, format = "html", caption = "Nominees Genders by Submitter Genders. Senior Scientist Award", align = "cccc") %>%
+  kable_styling(full_width = F, position = "center") %>%
+  add_footnote("ISCB 2016-2023") 
+
+```
+
+```{r echo=FALSE, message=FALSE}
+a <- table(innovator_df$Sumitter, innovator_df$Nominee)
+
+# Create the kable table
+kable(a, format = "html", caption = "Nominees Genders by Submitter Genders. ISCB Innovator Award", align = "cccc") %>%
+  kable_styling(full_width = F, position = "center") %>%
+  add_footnote("ISCB 2016-2023") 
+```
+
+```{r echo=FALSE, message=FALSE}
+a <- table(overton_df$Sumitter, overton_df$Nominee)
+
+# Create the kable table
+kable(a, format = "html", caption = "Nominees Genders by Submitter Genders. Overton Prize", align = "cccc") %>%
+  kable_styling(full_width = F, position = "center") %>%
+  add_footnote("ISCB 2016-2023") 
+```
